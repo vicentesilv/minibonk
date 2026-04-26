@@ -5,13 +5,12 @@ import 'package:flame/components.dart';
 
 import '../juego_mini_bonk.dart';
 
-class Jugador extends CircleComponent
+class Jugador extends SpriteComponent
     with CollisionCallbacks, HasGameReference<JuegoMiniBonk> {
   Jugador({required super.position})
       : super(
-          radius: 13,
+          size: Vector2(50, 50),
           anchor: Anchor.center,
-          paint: Paint()..color = const Color(0xFF35D0FF),
         );
 
   double velocidadMovimiento = 190;
@@ -23,10 +22,27 @@ class Jugador extends CircleComponent
   int proyectilesPorDisparo = 1;
   double _temporizadorDisparo = 0;
 
+  late Sprite _spriteArriba;
+  late Sprite _spriteAbajo;
+  late Sprite _spriteDerecha;
+  late Sprite _spriteIzquierda;
+
+  Vector2 _ultimaDireccion = Vector2(0, -1); // Por defecto mirando arriba
+
   @override
   Future<void> onLoad() async {
     await super.onLoad();
-    add(CircleHitbox());
+    
+    // Cargar las imágenes
+    _spriteArriba = await Sprite.load('personajes/prueba/arriba.png');
+    _spriteAbajo = await Sprite.load('personajes/prueba/abajo.png');
+    _spriteDerecha = await Sprite.load('personajes/prueba/derecha.png');
+    _spriteIzquierda = await Sprite.load('personajes/prueba/izquierda.png');
+
+    // Establecer sprite inicial
+    sprite = _spriteArriba;
+
+    add(CircleHitbox(radius: 13));
   }
 
   @override
@@ -36,13 +52,40 @@ class Jugador extends CircleComponent
     final entrada = game.entradaMovimiento;
     position += entrada * velocidadMovimiento * dt;
 
-    position.x = position.x.clamp(12, game.size.x - 12);
-    position.y = position.y.clamp(12, game.size.y - 12);
+    position.x = position.x.clamp(26, game.size.x - 26);
+    position.y = position.y.clamp(26, game.size.y - 26);
+
+    // Actualizar la dirección y la imagen del personaje
+    if (entrada.length2 > 0) {
+      _ultimaDireccion = entrada.normalized();
+      _actualizarImagenSegunDireccion();
+    }
 
     _temporizadorDisparo += dt;
     if (_temporizadorDisparo >= cadenciaDisparo) {
       _temporizadorDisparo = 0;
       _dispararAlMasCercano();
+    }
+  }
+
+  void _actualizarImagenSegunDireccion() {
+    final absX = _ultimaDireccion.x.abs();
+    final absY = _ultimaDireccion.y.abs();
+
+    if (absY > absX) {
+      // Movimiento vertical es dominante
+      if (_ultimaDireccion.y < 0) {
+        sprite = _spriteArriba;
+      } else {
+        sprite = _spriteAbajo;
+      }
+    } else {
+      // Movimiento horizontal es dominante
+      if (_ultimaDireccion.x < 0) {
+        sprite = _spriteIzquierda;
+      } else {
+        sprite = _spriteDerecha;
+      }
     }
   }
 
