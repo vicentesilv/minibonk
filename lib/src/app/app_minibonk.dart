@@ -10,7 +10,7 @@ class AppMiniBonk extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final juego = JuegoMiniBonk();
+    final juego = JuegoMiniBonk()..debugMode = true;
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,

@@ -1,0 +1,20 @@
+import 'package:flame/components.dart';
+
+import '../../game/components/entidades.dart';
+import '../../game/juego_mini_bonk.dart';
+
+void crearBalaJuego(
+  JuegoMiniBonk juego, {
+  required Vector2 origen,
+  required Vector2 direccion,
+  required double velocidad,
+  required double danio,
+}) {
+  juego.add(
+    Bala(
+      position: origen,
+      velocidad: direccion.normalized() * velocidad,
+      danio: danio,
+    ),
+  );
+}

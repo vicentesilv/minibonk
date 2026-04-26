@@ -42,7 +42,7 @@ class Jugador extends SpriteComponent
     // Establecer sprite inicial
     sprite = _spriteArriba;
 
-    add(CircleHitbox(radius: 13));
+    add(RectangleHitbox());
   }
 
   @override
