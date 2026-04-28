@@ -8,6 +8,11 @@ KeyEventResult onKeyEventJuego(
   KeyEvent event,
   Set<LogicalKeyboardKey> keysPressed,
 ) {
+  if (event is KeyDownEvent && event.logicalKey == LogicalKeyboardKey.escape) {
+    juego.alternarPausaManual();
+    return KeyEventResult.handled;
+  }
+
   final x = (keysPressed.contains(LogicalKeyboardKey.keyD) ||
               keysPressed.contains(LogicalKeyboardKey.arrowRight)
           ? 1

@@ -6,7 +6,7 @@ import 'package:minibonk/features/juego/presentation/juego/juego_mini_bonk.dart'
 
 
 void onGameUpdate(JuegoMiniBonk juego, double dt) {
-  if (juego.estaPausadoPorMejora || juego.finDePartida) {
+  if (juego.estaEnPausa) {
     return;
   }
 
