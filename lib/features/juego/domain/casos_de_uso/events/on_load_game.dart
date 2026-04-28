@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
+import 'package:minibonk/features/juego/domain/casos_de_uso/actualizar_ui.dart';
+import 'package:minibonk/features/juego/presentation/componentes/entidades.dart';
+import 'package:minibonk/features/juego/presentation/juego/juego_mini_bonk.dart';
 
-import '../../game/components/entidades.dart';
-import '../../game/juego_mini_bonk.dart';
-import 'actualizar_ui.dart';
 
 Future<void> onLoadJuego(JuegoMiniBonk juego) async {
   juego.camera.viewfinder.anchor = Anchor.topLeft;
@@ -35,6 +35,6 @@ Future<void> onLoadJuego(JuegoMiniBonk juego) async {
     juego.add(juego.palanca);
   }
 
-  juego.overlays.add('Hud');
+  juego.overlays.add('Interfaz');
   actualizarUiJuego(juego);
 }

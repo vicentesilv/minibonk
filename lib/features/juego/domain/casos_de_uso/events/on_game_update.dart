@@ -1,8 +1,9 @@
 import 'dart:math';
 
-import '../../game/juego_mini_bonk.dart';
-import 'actualizar_ui.dart';
-import 'crear_enemigo.dart';
+import 'package:minibonk/features/juego/domain/casos_de_uso/actualizar_ui.dart';
+import 'package:minibonk/features/juego/domain/casos_de_uso/generar_enemigo.dart';
+import 'package:minibonk/features/juego/presentation/juego/juego_mini_bonk.dart';
+
 
 void onGameUpdate(JuegoMiniBonk juego, double dt) {
   if (juego.estaPausadoPorMejora || juego.finDePartida) {

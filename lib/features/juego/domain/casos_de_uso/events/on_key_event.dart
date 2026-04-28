@@ -1,8 +1,7 @@
 import 'package:flame/components.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-
-import '../../game/juego_mini_bonk.dart';
+import 'package:minibonk/features/juego/presentation/juego/juego_mini_bonk.dart';
 
 KeyEventResult onKeyEventJuego(
   JuegoMiniBonk juego,
