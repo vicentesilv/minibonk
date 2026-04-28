@@ -1,7 +1,8 @@
 import 'dart:math';
 
-import 'package:minibonk/features/juego/domain/casos_de_uso/actualizar_ui.dart';
-import 'package:minibonk/features/juego/domain/casos_de_uso/generar_enemigo.dart';
+import 'package:minibonk/features/juego/domain/casos_de_uso/ui/actualizar_ui.dart';
+import 'package:minibonk/features/juego/domain/casos_de_uso/instancias/generar_enemigo.dart';
+import 'package:minibonk/features/juego/domain/casos_de_uso/world/mover_mapa.dart';
 import 'package:minibonk/features/juego/presentation/juego/juego_mini_bonk.dart';
 
 
@@ -9,6 +10,9 @@ void onGameUpdate(JuegoMiniBonk juego, double dt) {
   if (juego.estaEnPausa) {
     return;
   }
+
+  // Mover el mapa con joystick/teclado
+  moverMapaJuego(juego, dt);
 
   juego.temporizadorOleada += dt;
   juego.temporizadorAparicion += dt;

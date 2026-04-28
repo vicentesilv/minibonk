@@ -2,8 +2,9 @@ import 'dart:io';
 
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
-import 'package:minibonk/features/juego/domain/casos_de_uso/actualizar_ui.dart';
+import 'package:minibonk/features/juego/domain/casos_de_uso/ui/actualizar_ui.dart';
 import 'package:minibonk/features/juego/presentation/componentes/entidades.dart';
+import 'package:minibonk/features/juego/presentation/componentes/mundo_isometrico.dart';
 import 'package:minibonk/features/juego/presentation/juego/juego_mini_bonk.dart';
 
 
@@ -16,8 +17,18 @@ Future<void> onLoadJuego(JuegoMiniBonk juego) async {
   );
   juego.add(fondo);
 
+  // Crear el contenedor del mapa para moverlo con joystick/teclado
+  juego.mapContainer = PositionComponent();
+  
+  // Crear y agregar el mundo isométrico al contenedor del mapa
+  final mundoIsometrico = MundoIsometrico();
+  juego.mapContainer.add(mundoIsometrico);
+  
+  // Agregar el contenedor del mapa al juego
+  juego.add(juego.mapContainer);
+
   juego.jugador = Jugador(position: juego.size / 2);
-  juego.add(juego.jugador);
+  juego.mapContainer.add(juego.jugador);
 
   juego.palanca = JoystickComponent(
     knob: CircleComponent(

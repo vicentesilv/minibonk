@@ -1,18 +1,20 @@
 
 
-import 'package:minibonk/features/juego/domain/casos_de_uso/actualizar_ui.dart';
+import 'package:flame/components.dart';
+import 'package:minibonk/features/juego/domain/casos_de_uso/ui/actualizar_ui.dart';
 import 'package:minibonk/features/juego/presentation/componentes/entidades.dart';
 import 'package:minibonk/features/juego/presentation/juego/juego_mini_bonk.dart';
 
 void reiniciarJuegoExterno(JuegoMiniBonk juego) {
   for (final componente in [
-    ...juego.children.whereType<Enemigo>(),
-    ...juego.children.whereType<Bala>(),
-    ...juego.children.whereType<OrbeXp>(),
+    ...juego.mapContainer.children.whereType<Enemigo>(),
+    ...juego.mapContainer.children.whereType<Bala>(),
+    ...juego.mapContainer.children.whereType<OrbeXp>(),
   ]) {
     componente.removeFromParent();
   }
 
+  juego.mapContainer.position = Vector2.zero();
   juego.jugador.position = juego.size / 2;
   juego.jugador.reiniciarAtributos();
 

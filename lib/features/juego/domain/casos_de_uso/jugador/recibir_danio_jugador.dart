@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:minibonk/features/juego/domain/casos_de_uso/actualizar_ui.dart';
+import 'package:minibonk/features/juego/domain/casos_de_uso/ui/actualizar_ui.dart';
 import 'package:minibonk/features/juego/presentation/juego/juego_mini_bonk.dart';
 
 void recibirDanioJugadorJuego(JuegoMiniBonk juego, double danio) {

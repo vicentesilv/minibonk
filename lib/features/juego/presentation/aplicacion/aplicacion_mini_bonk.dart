@@ -10,10 +10,10 @@ class AplicacionMiniBonk extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final juego = JuegoMiniBonk()..debugMode = false;
+    final juego = JuegoMiniBonk()..debugMode = false;  // ...debugMode = true; para mostrar colisiones 
 
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: true,
       home: Scaffold(
         body: GameWidget(
           game: juego,

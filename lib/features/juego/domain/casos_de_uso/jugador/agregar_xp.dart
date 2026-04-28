@@ -1,7 +1,7 @@
 
 
-import 'package:minibonk/features/juego/domain/casos_de_uso/actualizar_ui.dart';
-import 'package:minibonk/features/juego/domain/casos_de_uso/mostrar_opciones_mejora.dart';
+import 'package:minibonk/features/juego/domain/casos_de_uso/ui/actualizar_ui.dart';
+import 'package:minibonk/features/juego/domain/casos_de_uso/jugador/mostrar_opciones_mejora.dart';
 import 'package:minibonk/features/juego/presentation/juego/juego_mini_bonk.dart';
 
 

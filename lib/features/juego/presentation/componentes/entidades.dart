@@ -52,8 +52,8 @@ class Jugador extends SpriteComponent
     final entrada = game.entradaMovimiento;
     position += entrada * velocidadMovimiento * dt;
 
-    position.x = position.x.clamp(26, game.size.x - 26);
-    position.y = position.y.clamp(26, game.size.y - 26);
+    // position.x = position.x.clamp(-1830, 1830);
+    // position.y = position.y.clamp(26, 1830);
 
     // Actualizar la dirección y la imagen del personaje
     if (entrada.length2 > 0) {
@@ -214,11 +214,9 @@ class Bala extends CircleComponent
     super.update(dt);
     position += velocidad * dt;
     _tiempoDeVida -= dt;
-    if (_tiempoDeVida <= 0 ||
-        position.x < -20 ||
-        position.y < -20 ||
-        position.x > game.size.x + 20 ||
-        position.y > game.size.y + 20) {
+    // Eliminar la bala solo si agota su tiempo de vida
+    // (ya no usar límites de pantalla porque está en mapContainer que se mueve)
+    if (_tiempoDeVida <= 0) {
       removeFromParent();
     }
   }

@@ -10,7 +10,7 @@ void crearBalaJuego(
   required double velocidad,
   required double danio,
 }) {
-  juego.add(
+  juego.mapContainer.add(
     Bala(
       position: origen,
       velocidad: direccion.normalized() * velocidad,

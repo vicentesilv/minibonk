@@ -17,7 +17,7 @@ void crearEnemigoJuego(JuegoMiniBonk juego) {
       posicion = Vector2(-20, juego.aleatorio.nextDouble() * juego.size.y);
   }
 
-  juego.add(
+  juego.mapContainer.add(
     Enemigo(
       position: posicion,
       velocidad: 55 + (juego.oleada * 2.2),

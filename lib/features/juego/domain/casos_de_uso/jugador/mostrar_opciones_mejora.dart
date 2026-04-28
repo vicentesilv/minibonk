@@ -2,7 +2,7 @@
 import 'package:minibonk/features/juego/domain/modelos/tipo_mejora.dart';
 import 'package:minibonk/features/juego/presentation/juego/juego_mini_bonk.dart';
 
-import 'actualizar_ui.dart';
+import '../ui/actualizar_ui.dart';
 
 void mostrarOpcionesMejoraJuego(JuegoMiniBonk juego) {
   if (juego.finDePartida) {

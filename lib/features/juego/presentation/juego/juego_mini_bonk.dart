@@ -5,26 +5,23 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:minibonk/features/juego/domain/casos_de_uso/actualizar_ui.dart';
-import 'package:minibonk/features/juego/domain/casos_de_uso/agregar_xp.dart';
-import 'package:minibonk/features/juego/domain/casos_de_uso/aplicar_mejora.dart';
-import 'package:minibonk/features/juego/domain/casos_de_uso/crear_bala.dart';
-import 'package:minibonk/features/juego/domain/casos_de_uso/crear_orbe_xp.dart';
-import 'package:minibonk/features/juego/domain/casos_de_uso/eliminar_enemigo.dart';
+import 'package:minibonk/features/juego/domain/casos_de_uso/ui/actualizar_ui.dart';
+import 'package:minibonk/features/juego/domain/casos_de_uso/jugador/agregar_xp.dart';
+import 'package:minibonk/features/juego/domain/casos_de_uso/jugador/aplicar_mejora.dart';
+import 'package:minibonk/features/juego/domain/casos_de_uso/instancias/crear_bala.dart';
+import 'package:minibonk/features/juego/domain/casos_de_uso/instancias/crear_orbe_xp.dart';
+import 'package:minibonk/features/juego/domain/casos_de_uso/ui/eliminar_enemigo.dart';
 import 'package:minibonk/features/juego/domain/casos_de_uso/events/entrada_movimiento.dart';
 import 'package:minibonk/features/juego/domain/casos_de_uso/events/on_game_resize.dart';
 import 'package:minibonk/features/juego/domain/casos_de_uso/events/on_game_update.dart';
 import 'package:minibonk/features/juego/domain/casos_de_uso/events/on_key_event.dart';
 import 'package:minibonk/features/juego/domain/casos_de_uso/events/on_load_game.dart';
-import 'package:minibonk/features/juego/domain/casos_de_uso/obtener_enemigo_mas_cercano.dart';
-import 'package:minibonk/features/juego/domain/casos_de_uso/recibir_danio_jugador.dart';
-import 'package:minibonk/features/juego/domain/casos_de_uso/reiniciar_partida.dart';
+import 'package:minibonk/features/juego/domain/casos_de_uso/jugador/obtener_enemigo_mas_cercano.dart';
+import 'package:minibonk/features/juego/domain/casos_de_uso/jugador/recibir_danio_jugador.dart';
+import 'package:minibonk/features/juego/domain/casos_de_uso/ui/reiniciar_partida.dart';
 import 'package:minibonk/features/juego/domain/modelos/estado_interfaz_juego.dart';
 import 'package:minibonk/features/juego/domain/modelos/tipo_mejora.dart';
 import 'package:minibonk/features/juego/presentation/componentes/entidades.dart';
-
-
-
 
 
 class JuegoMiniBonk extends FlameGame
@@ -35,6 +32,7 @@ class JuegoMiniBonk extends FlameGame
 
   late final Jugador jugador;
   late final JoystickComponent palanca;
+  late final PositionComponent mapContainer;
 
   Vector2 entradaTeclado = Vector2.zero();
   double temporizadorAparicion = 0;
