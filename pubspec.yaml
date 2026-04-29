@@ -63,8 +63,10 @@ flutter:
     - assets/images/
     - assets/images/personajes/prueba/
     - assets/images/Escenario/Suelos/
-
-  # An image asset can refer to one or more resolution-specific "variants", see
+    - assets/images/Escenario/Decorado/Flores/
+    - assets/images/Escenario/Decorado/Gusano con Flor/
+    - assets/images/Escenario/Decorado/Pasto/
+    - assets/images/Escenario/Decorado/rocas/
   # https://flutter.dev/to/resolution-aware-images
 
   # For details regarding adding assets from package dependencies, see
