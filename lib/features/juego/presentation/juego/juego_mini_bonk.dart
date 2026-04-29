@@ -144,6 +144,10 @@ class JuegoMiniBonk extends FlameGame
     reiniciarJuegoExterno(this);
   }
 
+  void nuevaPartida() {
+    volverAlMenuInicio(this);
+  }
+
   void iniciarConPersonaje(TipoPersonaje tipo) {
     final posicionInicial = size / 2;
 

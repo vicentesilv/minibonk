@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
 class FilaEtiqueta extends StatelessWidget {
-  const FilaEtiqueta({super.key, required this.texto});
+  const FilaEtiqueta({
+    super.key,
+    required this.texto,
+    this.compacta = false,
+  });
 
   final String texto;
+  final bool compacta;
 
   @override
   Widget build(BuildContext context) {
@@ -13,10 +18,17 @@ class FilaEtiqueta extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+        padding: EdgeInsets.symmetric(
+          horizontal: compacta ? 8 : 10,
+          vertical: compacta ? 4 : 6,
+        ),
         child: Text(
           texto,
-          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w600,
+            fontSize: compacta ? 12 : 14,
+          ),
         ),
       ),
     );

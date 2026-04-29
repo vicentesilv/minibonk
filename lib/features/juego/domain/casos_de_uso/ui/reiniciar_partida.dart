@@ -34,3 +34,34 @@ void reiniciarJuegoExterno(JuegoMiniBonk juego) {
   juego.resumeEngine();
   actualizarUiJuego(juego);
 }
+
+void volverAlMenuInicio(JuegoMiniBonk juego) {
+  for (final componente in [
+    ...juego.mapContainer.children.whereType<Enemigo>(),
+    ...juego.mapContainer.children.whereType<Bala>(),
+    ...juego.mapContainer.children.whereType<OrbeXp>(),
+    ...juego.mapContainer.children.whereType<PersonajeBase>(),
+  ]) {
+    componente.removeFromParent();
+  }
+
+  juego.mapContainer.position = Vector2.zero();
+  juego.oleada = 1;
+  juego.nivel = 1;
+  juego.xp = 0;
+  juego.xpSiguiente = 36;
+  juego.enemigosEliminados = 0;
+  juego.temporizadorAparicion = 0;
+  juego.temporizadorOleada = 0;
+  juego.intervaloAparicion = 1.1;
+  juego.estaPausadoPorMejora = false;
+  juego.estaPausadoManual = false;
+  juego.finDePartida = false;
+  juego.juegoIniciado = false;
+  juego.opcionesActualesDeMejoraInternas.clear();
+  juego.overlays.remove('Interfaz');
+  juego.overlays.remove('Mejoras');
+  juego.overlays.add('MenuInicio');
+  juego.pauseEngine();
+  actualizarUiJuego(juego);
+}

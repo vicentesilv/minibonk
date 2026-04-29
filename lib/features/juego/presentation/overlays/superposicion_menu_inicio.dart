@@ -17,6 +17,14 @@ class _SuperposicionMenuInicioState extends State<SuperposicionMenuInicio> {
   @override
   Widget build(BuildContext context) {
     final tema = Theme.of(context);
+    final anchoPantalla = MediaQuery.sizeOf(context).width;
+    final esMovil = anchoPantalla < 600;
+    final margenExterior = esMovil ? 12.0 : 24.0;
+    final rellenoPanel = esMovil ? 16.0 : 24.0;
+    final maxAnchoPanel = esMovil ? 560.0 : 920.0;
+    final separacionTarjetas = esMovil ? 12.0 : 16.0;
+    final tamanioTitulo = esMovil ? 24.0 : 34.0;
+    final tamanioBoton = esMovil ? 16.0 : 18.0;
 
     return Material(
       color: const Color(0xCC17351D),
@@ -35,11 +43,11 @@ class _SuperposicionMenuInicioState extends State<SuperposicionMenuInicio> {
         child: SafeArea(
           child: Center(
             child: SingleChildScrollView(
-              padding: const EdgeInsets.all(24),
+              padding: EdgeInsets.all(margenExterior),
               child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 920),
+                constraints: BoxConstraints(maxWidth: maxAnchoPanel),
                 child: Container(
-                  padding: const EdgeInsets.all(24),
+                  padding: EdgeInsets.all(rellenoPanel),
                   decoration: BoxDecoration(
                     gradient: const LinearGradient(
                       colors: [
@@ -84,6 +92,7 @@ class _SuperposicionMenuInicioState extends State<SuperposicionMenuInicio> {
                         style: tema.textTheme.headlineMedium?.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.w800,
+                          fontSize: tamanioTitulo,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -92,14 +101,15 @@ class _SuperposicionMenuInicioState extends State<SuperposicionMenuInicio> {
                         'Elige el estilo de juego que prefieras. Cada personaje tiene su propia forma de atacar y moverse.',
                         style: tema.textTheme.bodyMedium?.copyWith(
                           color: Colors.white70,
-                          height: 1.45,
+                          height: 1.35,
+                          fontSize: esMovil ? 13.5 : 15,
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      const SizedBox(height: 24),
+                      SizedBox(height: esMovil ? 16 : 24),
                       LayoutBuilder(
                         builder: (context, constraints) {
-                          final usarColumna = constraints.maxWidth < 720;
+                          final usarColumna = constraints.maxWidth < 720 || esMovil;
                           return Flex(
                             direction: usarColumna ? Axis.vertical : Axis.horizontal,
                             children: [
@@ -117,7 +127,7 @@ class _SuperposicionMenuInicioState extends State<SuperposicionMenuInicio> {
                                   },
                                 ),
                               ),
-                              SizedBox(width: usarColumna ? 0 : 16, height: usarColumna ? 16 : 0),
+                              SizedBox(width: usarColumna ? 0 : separacionTarjetas, height: usarColumna ? separacionTarjetas : 0),
                               Expanded(
                                 child: _TarjetaPersonaje(
                                   titulo: 'Pepe',
@@ -139,7 +149,7 @@ class _SuperposicionMenuInicioState extends State<SuperposicionMenuInicio> {
                           );
                         },
                       ),
-                      const SizedBox(height: 24),
+                      SizedBox(height: esMovil ? 16 : 24),
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
@@ -151,9 +161,9 @@ class _SuperposicionMenuInicioState extends State<SuperposicionMenuInicio> {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF6DFF7A),
                             foregroundColor: Colors.black,
-                            padding: const EdgeInsets.symmetric(vertical: 18),
-                            textStyle: const TextStyle(
-                              fontSize: 18,
+                            padding: EdgeInsets.symmetric(vertical: esMovil ? 14 : 18),
+                            textStyle: TextStyle(
+                              fontSize: tamanioBoton,
                               fontWeight: FontWeight.bold,
                             ),
                             shape: RoundedRectangleBorder(
@@ -199,6 +209,10 @@ class _TarjetaPersonaje extends StatelessWidget {
   Widget build(BuildContext context) {
     final borde = seleccionada ? const Color(0xFF6DFF7A) : const Color(0xFF3A4A3C);
     final fondo = seleccionada ? const Color(0xFF1E2F21) : const Color(0xFF0F1410);
+    final anchoPantalla = MediaQuery.sizeOf(context).width;
+    final esMovil = anchoPantalla < 600;
+    final altoImagen = esMovil ? 110.0 : 180.0;
+    final tamanioTitulo = esMovil ? 18.0 : 22.0;
 
     return InkWell(
       onTap: onTap,
@@ -223,7 +237,7 @@ class _TarjetaPersonaje extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              height: 180,
+              height: altoImagen,
               width: double.infinity,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -254,9 +268,9 @@ class _TarjetaPersonaje extends StatelessWidget {
             const SizedBox(height: 16),
             Text(
               titulo,
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.white,
-                fontSize: 22,
+                fontSize: tamanioTitulo,
                 fontWeight: FontWeight.w800,
               ),
               textAlign: TextAlign.center,
@@ -267,21 +281,25 @@ class _TarjetaPersonaje extends StatelessWidget {
               style: TextStyle(
                 color: seleccionada ? const Color(0xFF8CFF93) : Colors.white60,
                 fontWeight: FontWeight.w600,
-              ),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              descripcion,
-              style: const TextStyle(
-                color: Colors.white70,
-                height: 1.35,
+                fontSize: esMovil ? 13 : 14,
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 14),
+            const SizedBox(height: 4),
+            const SizedBox(height: 8),
+            Text(
+              descripcion,
+              style: TextStyle(
+                color: Colors.white70,
+                height: 1.25,
+                fontSize: esMovil ? 12.5 : 14,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 12),
             AnimatedContainer(
               duration: const Duration(milliseconds: 180),
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+              padding: EdgeInsets.symmetric(horizontal: esMovil ? 12 : 14, vertical: esMovil ? 7 : 8),
               decoration: BoxDecoration(
                 color: seleccionada ? const Color(0xFF2D6B31) : const Color(0xFF26302A),
                 borderRadius: BorderRadius.circular(999),
@@ -291,6 +309,7 @@ class _TarjetaPersonaje extends StatelessWidget {
                 style: TextStyle(
                   color: seleccionada ? Colors.white : Colors.white70,
                   fontWeight: FontWeight.w700,
+                  fontSize: esMovil ? 12.5 : 14,
                 ),
               ),
             ),
