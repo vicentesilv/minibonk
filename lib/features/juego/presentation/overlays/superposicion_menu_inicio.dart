@@ -115,9 +115,9 @@ class _SuperposicionMenuInicioState extends State<SuperposicionMenuInicio> {
                             children: [
                               Expanded(
                                 child: _TarjetaPersonaje(
-                                  titulo: 'Actual',
+                                  titulo: 'prueba',
                                   subtitulo: 'Distancia',
-                                  descripcion: 'Ataque a distancia con proyectiles.',
+                                  descripcion: 'personaje con ataques a distancia con proyectiles permitiendo alcanzar a los enemigos desde lejos sin necesidad de acercarse.',
                                   seleccionada: _seleccion == TipoPersonaje.prueba,
                                   imagenAsset: 'assets/images/personajes/prueba/abajo.png',
                                   onTap: () {
@@ -132,7 +132,7 @@ class _SuperposicionMenuInicioState extends State<SuperposicionMenuInicio> {
                                 child: _TarjetaPersonaje(
                                   titulo: 'Pepe',
                                   subtitulo: 'Cuerpo a cuerpo',
-                                  descripcion: 'Animaciones de quieto, mover y ataque con onda wifi especial.',
+                                  descripcion: 'personaje con ataques de cuerpo a cuerpo con buen nivel de daño y un ataque especial con la probabilidad de generar una onda wifi que daña o elimina a los enemigos .',
                                   seleccionada: _seleccion == TipoPersonaje.pepe,
                                   animacionAssets: const [
                                     'assets/images/Personajes/pepe/quieto/quieto enfrente1.png',
