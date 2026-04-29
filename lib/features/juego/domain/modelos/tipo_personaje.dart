@@ -1,0 +1,4 @@
+enum TipoPersonaje {
+  prueba,
+  pepe,
+}

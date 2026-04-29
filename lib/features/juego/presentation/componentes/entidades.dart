@@ -6,12 +6,12 @@ import 'package:minibonk/features/juego/presentation/componentes/mundo.dart';
 import 'package:minibonk/features/juego/presentation/juego/juego_mini_bonk.dart';
 
 
-class Jugador extends SpriteComponent
+abstract class PersonajeBase extends SpriteComponent
     with CollisionCallbacks, HasGameReference<JuegoMiniBonk> {
-  Jugador({required super.position})
+  PersonajeBase({required super.position, Vector2? size, Anchor anchor = Anchor.center})
       : super(
-          size: Vector2(50, 50),
-          anchor: Anchor.center,
+          size: size ?? Vector2(50, 50),
+          anchor: anchor,
         );
 
   double velocidadMovimiento = 190;
@@ -21,6 +21,14 @@ class Jugador extends SpriteComponent
   double danioBala = 12;
   double velocidadProyectil = 300;
   int proyectilesPorDisparo = 1;
+
+  void reiniciarAtributos() {}
+}
+
+class Jugador extends PersonajeBase {
+  Jugador({required super.position})
+      : super(size: Vector2(50, 50));
+
   double _temporizadorDisparo = 0;
 
   late Sprite _spriteArriba;
@@ -184,7 +192,7 @@ class Enemigo extends CircleComponent
 
   @override
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
-    if (other is Jugador) {
+    if (other is PersonajeBase) {
       game.recibirDanioJugador(danioContacto);
       removeFromParent();
     }
@@ -255,7 +263,7 @@ class OrbeXp extends CircleComponent
 
   @override
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
-    if (other is Jugador) {
+    if (other is PersonajeBase) {
       game.agregarXp(valor);
       removeFromParent();
     }

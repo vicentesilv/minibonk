@@ -62,6 +62,10 @@ flutter:
   assets:
     - assets/images/
     - assets/images/personajes/prueba/
+    - assets/images/Personajes/pepe/ataque/
+    - assets/images/Personajes/pepe/ataque/wifi/
+    - assets/images/Personajes/pepe/mover/
+    - assets/images/Personajes/pepe/quieto/
     - assets/images/Escenario/Suelos/
     - assets/images/Escenario/Decorado/Flores/
     - assets/images/Escenario/Decorado/Gusano con Flor/

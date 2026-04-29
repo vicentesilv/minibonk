@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../juego/juego_mini_bonk.dart';
 import '../overlays/superposicion_hud.dart';
 import '../overlays/superposicion_mejora.dart';
+import '../overlays/superposicion_menu_inicio.dart';
 
 class AplicacionMiniBonk extends StatelessWidget {
   const AplicacionMiniBonk({super.key});
@@ -17,7 +18,10 @@ class AplicacionMiniBonk extends StatelessWidget {
       home: Scaffold(
         body: GameWidget(
           game: juego,
+          initialActiveOverlays: const ['MenuInicio'],
           overlayBuilderMap: {
+            'MenuInicio': (context, juego) =>
+                SuperposicionMenuInicio(juego: juego as JuegoMiniBonk),
             'Interfaz': (context, juego) =>
                 SuperposicionHud(juego: juego as JuegoMiniBonk),
             'Mejoras': (context, juego) =>

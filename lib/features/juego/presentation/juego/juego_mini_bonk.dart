@@ -6,6 +6,7 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:minibonk/features/juego/domain/casos_de_uso/ui/actualizar_ui.dart';
+import 'package:minibonk/features/juego/domain/modelos/tipo_personaje.dart';
 import 'package:minibonk/features/juego/domain/casos_de_uso/jugador/agregar_xp.dart';
 import 'package:minibonk/features/juego/domain/casos_de_uso/jugador/aplicar_mejora.dart';
 import 'package:minibonk/features/juego/domain/casos_de_uso/instancias/crear_bala.dart';
@@ -22,6 +23,7 @@ import 'package:minibonk/features/juego/domain/casos_de_uso/ui/reiniciar_partida
 import 'package:minibonk/features/juego/domain/modelos/estado_interfaz_juego.dart';
 import 'package:minibonk/features/juego/domain/modelos/tipo_mejora.dart';
 import 'package:minibonk/features/juego/presentation/componentes/entidades.dart';
+import 'package:minibonk/features/juego/presentation/componentes/personaje_pepe.dart';
 
 
 class JuegoMiniBonk extends FlameGame
@@ -30,7 +32,8 @@ class JuegoMiniBonk extends FlameGame
   final ValueNotifier<EstadoInterfazJuego> estadoUi =
       ValueNotifier(const EstadoInterfazJuego());
 
-  late final Jugador jugador;
+  late PersonajeBase jugador;
+  bool juegoIniciado = false;
   late final JoystickComponent palanca;
   late final PositionComponent mapContainer;
 
@@ -66,12 +69,18 @@ class JuegoMiniBonk extends FlameGame
     KeyEvent event,
     Set<LogicalKeyboardKey> keysPressed,
   ) {
+    if (!juegoIniciado) {
+      return KeyEventResult.ignored;
+    }
     return onKeyEventJuego(this, event, keysPressed);
   }
 
   @override
   void update(double dt) {
     super.update(dt);
+    if (!juegoIniciado) {
+      return;
+    }
     onGameUpdate(this, dt);
   }
 
@@ -118,7 +127,7 @@ class JuegoMiniBonk extends FlameGame
   }
 
   void alternarPausaManual() {
-    if (finDePartida || estaPausadoPorMejora) {
+    if (!juegoIniciado || finDePartida || estaPausadoPorMejora) {
       return;
     }
 
@@ -133,6 +142,30 @@ class JuegoMiniBonk extends FlameGame
 
   void reiniciarJuego() {
     reiniciarJuegoExterno(this);
+  }
+
+  void iniciarConPersonaje(TipoPersonaje tipo) {
+    final posicionInicial = size / 2;
+
+    final personajesActuales = mapContainer.children.whereType<PersonajeBase>().toList();
+    for (final personaje in personajesActuales) {
+      personaje.removeFromParent();
+    }
+
+    jugador = switch (tipo) {
+      TipoPersonaje.prueba => Jugador(position: posicionInicial),
+      TipoPersonaje.pepe => Pepe(position: posicionInicial),
+    };
+
+    mapContainer.add(jugador);
+    juegoIniciado = true;
+    estaPausadoManual = false;
+    estaPausadoPorMejora = false;
+    finDePartida = false;
+    overlays.remove('MenuInicio');
+    overlays.add('Interfaz');
+    resumeEngine();
+    actualizarUiJuego(this);
   }
 
   void aplicarMejora(TipoMejora tipo) {
