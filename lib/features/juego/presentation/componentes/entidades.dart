@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:minibonk/features/juego/presentation/componentes/mundo.dart';
 import 'package:minibonk/features/juego/presentation/juego/juego_mini_bonk.dart';
 
 
@@ -52,10 +53,14 @@ class Jugador extends SpriteComponent
     final entrada = game.entradaMovimiento;
     position += entrada * velocidadMovimiento * dt;
 
-    // position.x = position.x.clamp(-1830, 1830);
-    // position.y = position.y.clamp(26, 1830);
+    final mitadAnchoJugador = size.x / 2;
+    final mitadAltoJugador = size.y / 2;
+    final limiteX = (MundoIsometrico.columnas * MundoIsometrico.tamanoTile) - mitadAnchoJugador;
+    final limiteY = (MundoIsometrico.filas * MundoIsometrico.tamanoTile) - mitadAltoJugador;
 
-    // Actualizar la dirección y la imagen del personaje
+    position.x = position.x.clamp(mitadAnchoJugador, limiteX);
+    position.y = position.y.clamp(mitadAltoJugador, limiteY);
+
     if (entrada.length2 > 0) {
       _ultimaDireccion = entrada.normalized();
       _actualizarImagenSegunDireccion();

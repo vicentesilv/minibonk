@@ -4,7 +4,7 @@ import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 import 'package:minibonk/features/juego/domain/casos_de_uso/ui/actualizar_ui.dart';
 import 'package:minibonk/features/juego/presentation/componentes/entidades.dart';
-import 'package:minibonk/features/juego/presentation/componentes/mundo_isometrico.dart';
+import 'package:minibonk/features/juego/presentation/componentes/mundo.dart';
 import 'package:minibonk/features/juego/presentation/juego/juego_mini_bonk.dart';
 
 
