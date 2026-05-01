@@ -26,19 +26,19 @@ class TarjetaPersonaje extends StatelessWidget {
     final fondo = seleccionada ? const Color(0xFF1E2F21) : const Color(0xFF0F1410);
     final anchoPantalla = MediaQuery.sizeOf(context).width;
     final esMovil = anchoPantalla < 600;
-    final altoImagen = esMovil ? 110.0 : 180.0;
-    final tamanioTitulo = esMovil ? 18.0 : 22.0;
+    final altoImagen = esMovil ? 80.0 : 120.0;
+    final tamanioTitulo = esMovil ? 14.0 : 17.0;
 
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(22),
+      borderRadius: BorderRadius.circular(18),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 180),
-        margin: const EdgeInsets.only(bottom: 4),
-        padding: const EdgeInsets.all(18),
+        margin: const EdgeInsets.only(bottom: 2),
+        padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: fondo,
-          borderRadius: BorderRadius.circular(22),
+          borderRadius: BorderRadius.circular(18),
           border: Border.all(color: borde, width: 2),
           boxShadow: [
             BoxShadow(
@@ -63,10 +63,10 @@ class TarjetaPersonaje extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 ),
-                borderRadius: BorderRadius.circular(18),
+                borderRadius: BorderRadius.circular(14),
                 border: Border.all(color: borde),
               ),
-              padding: const EdgeInsets.all(12),
+                padding: const EdgeInsets.all(6),
               child: animacionAssets != null
                   ? PreviewAnim(frames: animacionAssets!)
                   : Image.asset(
@@ -75,58 +75,67 @@ class TarjetaPersonaje extends StatelessWidget {
                       filterQuality: FilterQuality.none,
                       errorBuilder: (context, error, stackTrace) {
                         return const Center(
-                          child: Icon(Icons.person, size: 72, color: Colors.white54),
+                          child: Icon(Icons.person, size: 54, color: Colors.white54),
                         );
                       },
                     ),
             ),
-            const SizedBox(height: 16),
-            Text(
-              titulo,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: tamanioTitulo,
-                fontWeight: FontWeight.w800,
-              ),
-              textAlign: TextAlign.center,
-            ),
             const SizedBox(height: 4),
-            Text(
-              subtitulo,
-              style: TextStyle(
-                color: seleccionada ? const Color(0xFF8CFF93) : Colors.white60,
-                fontWeight: FontWeight.w600,
-                fontSize: esMovil ? 13 : 14,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 4),
-            const SizedBox(height: 8),
-            Text(
-              descripcion,
-              style: TextStyle(
-                color: Colors.white70,
-                height: 1.25,
-                fontSize: esMovil ? 12.5 : 14,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 12),
-            AnimatedContainer(
-              duration: const Duration(milliseconds: 180),
-              padding: EdgeInsets.symmetric(horizontal: esMovil ? 12 : 14, vertical: esMovil ? 7 : 8),
-              decoration: BoxDecoration(
-                color: seleccionada ? const Color(0xFF2D6B31) : const Color(0xFF26302A),
-                borderRadius: BorderRadius.circular(999),
-              ),
-              child: Text(
-                seleccionada ? 'Seleccionado' : 'Toca para elegir',
-                style: TextStyle(
-                  color: seleccionada ? Colors.white : Colors.white70,
-                  fontWeight: FontWeight.w700,
-                  fontSize: esMovil ? 12.5 : 14,
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Flexible(
+                  fit: FlexFit.loose,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        titulo,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: tamanioTitulo,
+                          fontWeight: FontWeight.w800,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        subtitulo,
+                        style: TextStyle(
+                          color:
+                              seleccionada ? const Color(0xFF8CFF93) : Colors.white60,
+                          fontWeight: FontWeight.w600,
+                          fontSize: esMovil ? 11 : 12,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
+                const SizedBox(width: 80),
+                Flexible(
+                  fit: FlexFit.loose,
+                  
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxWidth: esMovil ? 220 : 380,
+                    ),
+                    child: Text(
+                      descripcion,
+                      style: TextStyle(
+                        color: Colors.white70,
+                        height: 1.25,
+                        fontSize: esMovil ? 10.0 : 11.0,
+                      ),
+                      textAlign: TextAlign.left,
+                      maxLines: esMovil ? 2 : 3,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
