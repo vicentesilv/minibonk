@@ -74,6 +74,8 @@ flutter:
     - assets/images/Visual/
     - assets/images/Visual/Gui/
     - assets/images/Visual/Gui/Barra/
+    - assets/images/Objetos del Mapa/
+    - assets/images/Objetos del Mapa/Cofre/
   # https://flutter.dev/to/resolution-aware-images
 
   # For details regarding adding assets from package dependencies, see

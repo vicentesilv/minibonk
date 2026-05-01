@@ -49,8 +49,7 @@ class Jugador extends PersonajeBase {
     _spriteIzquierda = await Sprite.load('personajes/prueba/izquierda.png');
 
     // Establecer sprite inicial
-    sprite = _spriteArriba;
-
+    sprite = _spriteAbajo;
     add(RectangleHitbox());
   }
 
@@ -82,37 +81,44 @@ class Jugador extends PersonajeBase {
   }
 
   void _actualizarImagenSegunDireccion() {
-    final absX = _ultimaDireccion.x.abs();
-    final absY = _ultimaDireccion.y.abs();
-
-    if (absY > absX) {
-      // Movimiento vertical es dominante
-      if (_ultimaDireccion.y < 0) {
-        sprite = _spriteArriba;
-      } else {
-        sprite = _spriteAbajo;
-      }
-    } else {
-      // Movimiento horizontal es dominante
-      if (_ultimaDireccion.x < 0) {
-        sprite = _spriteIzquierda;
-      } else {
-        sprite = _spriteDerecha;
-      }
-    }
+    sprite = (_ultimaDireccion.y.abs() > _ultimaDireccion.x.abs())
+        ? (_ultimaDireccion.y < 0 ? _spriteArriba : _spriteAbajo)
+        : (_ultimaDireccion.x < 0 ? _spriteIzquierda : _spriteDerecha);
   }
 
-  void reiniciarAtributos() {
-    velocidadMovimiento = 190;
-    vidaMaxima = 100;
-    vida = 100;
-    cadenciaDisparo = 0.35;
-    danioBala = 12;
-    velocidadProyectil = 300;
-    proyectilesPorDisparo = 1;
-    _temporizadorDisparo = 0;
-    game.estadoUi.value = game.estadoUi.value.copyWith(vida: vida, vidaMaxima: vidaMaxima);
-  }
+
+  // void _actualizarImagenSegunDireccion() {
+  //   final absX = _ultimaDireccion.x.abs();
+  //   final absY = _ultimaDireccion.y.abs();
+
+  //   if (absY > absX) {
+  //     // Movimiento vertical es dominante
+  //     if (_ultimaDireccion.y < 0) {
+  //       sprite = _spriteArriba;
+  //     } else {
+  //       sprite = _spriteAbajo;
+  //     }
+  //   } else {
+  //     // Movimiento horizontal es dominante
+  //     if (_ultimaDireccion.x < 0) {
+  //       sprite = _spriteIzquierda;
+  //     } else {
+  //       sprite = _spriteDerecha;
+  //     }
+  //   }
+  // }
+
+  // void reiniciarAtributos() {
+  //   velocidadMovimiento = 190;
+  //   vidaMaxima = 100;
+  //   vida = 100;
+  //   cadenciaDisparo = 0.35;
+  //   danioBala = 12;
+  //   velocidadProyectil = 300;
+  //   proyectilesPorDisparo = 1;
+  //   _temporizadorDisparo = 0;
+  //   game.estadoUi.value = game.estadoUi.value.copyWith(vida: vida, vidaMaxima: vidaMaxima);
+  // }
 
   void _dispararAlMasCercano() {
     final objetivo = game.obtenerEnemigoMasCercano(position);
@@ -244,13 +250,12 @@ class Bala extends CircleComponent
   }
 }
 
-class OrbeXp extends CircleComponent
+class OrbeXp extends SpriteComponent
     with CollisionCallbacks, HasGameReference<JuegoMiniBonk> {
   OrbeXp({required super.position, required this.valor})
       : super(
-          radius: 5,
           anchor: Anchor.center,
-          paint: Paint()..color = const Color(0xFF7CFF6B),
+          priority: 100000,
         );
 
   final double valor;
@@ -258,6 +263,9 @@ class OrbeXp extends CircleComponent
   @override
   Future<void> onLoad() async {
     await super.onLoad();
+    sprite = await Sprite.load('Objetos del Mapa/exp.png');
+    // Asegurar que el sprite se dibuje al tamaño deseado
+    size = Vector2(84, 84);
     add(CircleHitbox());
   }
 
