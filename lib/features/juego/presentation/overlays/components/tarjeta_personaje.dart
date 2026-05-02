@@ -25,8 +25,8 @@ class TarjetaPersonaje extends StatelessWidget {
     final borde = seleccionada ? const Color(0xFF6DFF7A) : const Color(0xFF3A4A3C);
     final fondo = seleccionada ? const Color(0xFF1E2F21) : const Color(0xFF0F1410);
     final anchoPantalla = MediaQuery.sizeOf(context).width;
-    final esMovil = anchoPantalla < 600;
-    final altoImagen = esMovil ? 80.0 : 120.0;
+    final esMovil = anchoPantalla < 700;
+    final altoImagen = esMovil ? 84.0 : 128.0;
     final tamanioTitulo = esMovil ? 14.0 : 17.0;
 
     return InkWell(
@@ -81,14 +81,12 @@ class TarjetaPersonaje extends StatelessWidget {
                     ),
             ),
             const SizedBox(height: 4),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Flexible(
-                  fit: FlexFit.loose,
-                  child: Column(
+            LayoutBuilder(
+              builder: (context, constraints) {
+                final usarColumna = constraints.maxWidth < 340;
+
+                if (usarColumna) {
+                  return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
@@ -98,44 +96,80 @@ class TarjetaPersonaje extends StatelessWidget {
                           fontSize: tamanioTitulo,
                           fontWeight: FontWeight.w800,
                         ),
-                        textAlign: TextAlign.left,
                       ),
                       const SizedBox(height: 2),
                       Text(
                         subtitulo,
                         style: TextStyle(
-                          color:
-                              seleccionada ? const Color(0xFF8CFF93) : Colors.white60,
+                          color: seleccionada
+                              ? const Color(0xFF8CFF93)
+                              : Colors.white60,
                           fontWeight: FontWeight.w600,
                           fontSize: esMovil ? 11 : 12,
                         ),
-                        textAlign: TextAlign.left,
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        descripcion,
+                        style: TextStyle(
+                          color: Colors.white70,
+                          height: 1.25,
+                          fontSize: esMovil ? 10.0 : 11.0,
+                        ),
+                        maxLines: esMovil ? 3 : 4,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ],
-                  ),
-                ),
-                const SizedBox(width: 80),
-                Flexible(
-                  fit: FlexFit.loose,
-                  
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: esMovil ? 220 : 380,
-                    ),
-                    child: Text(
-                      descripcion,
-                      style: TextStyle(
-                        color: Colors.white70,
-                        height: 1.25,
-                        fontSize: esMovil ? 10.0 : 11.0,
+                  );
+                }
+
+                return Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      flex: 3,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            titulo,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: tamanioTitulo,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            subtitulo,
+                            style: TextStyle(
+                              color: seleccionada
+                                  ? const Color(0xFF8CFF93)
+                                  : Colors.white60,
+                              fontWeight: FontWeight.w600,
+                              fontSize: esMovil ? 11 : 12,
+                            ),
+                          ),
+                        ],
                       ),
-                      textAlign: TextAlign.left,
-                      maxLines: esMovil ? 2 : 3,
-                      overflow: TextOverflow.ellipsis,
                     ),
-                  ),
-                ),
-              ],
+                    const SizedBox(width: 12),
+                    Expanded(
+                      flex: 5,
+                      child: Text(
+                        descripcion,
+                        style: TextStyle(
+                          color: Colors.white70,
+                          height: 1.25,
+                          fontSize: esMovil ? 10.0 : 11.0,
+                        ),
+                        maxLines: esMovil ? 3 : 4,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
           ],
         ),
