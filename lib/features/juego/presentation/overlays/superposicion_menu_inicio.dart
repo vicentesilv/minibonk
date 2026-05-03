@@ -1,3 +1,7 @@
+// ignore_for_file: avoid_print, duplicate_ignore
+
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:minibonk/features/juego/domain/modelos/tipo_personaje.dart';
 import 'package:minibonk/features/juego/presentation/juego/juego_mini_bonk.dart';
@@ -48,13 +52,16 @@ class _SuperposicionMenuInicioState extends State<SuperposicionMenuInicio> {
     final size = MediaQuery.sizeOf(context);
     final anchoPantalla = size.width;
     final altoPantalla = size.height;
-    final esMovil = anchoPantalla < 600;
+    final movil = Platform.isAndroid || Platform.isIOS || Platform.isFuchsia;
     // Usar porcentajes para móviles
-    final margenExterior = esMovil ? altoPantalla * 0.015 : 24.0;
-    final rellenoPanel = esMovil ? altoPantalla * 0.02 : 24.0;
-    final maxAnchoPanel = esMovil ? anchoPantalla * 0.95 : 920.0;
-    final maxAltoPanel = esMovil ? altoPantalla * 0.9 : altoPantalla * 0.9;
-    
+    final margenExterior = movil ? altoPantalla * 0.061 : 24.0;
+    final rellenoPanel = movil ? altoPantalla * 0.061 : 24.0;
+    final maxAnchoPanel = movil ? anchoPantalla * 1.097 : 920.0;
+    final maxAltoPanel = movil ? altoPantalla * 0.9 : altoPantalla * 0.9;
+   // ignore: avoid_print
+   print("es movil: $movil");
+   print("el ancho de la pantalla es: $anchoPantalla");
+   print("el alto de la pantalla es: $altoPantalla");
 
     return Material(
       color: const Color(0xCC17351D),
@@ -72,13 +79,13 @@ class _SuperposicionMenuInicioState extends State<SuperposicionMenuInicio> {
               child: Align(
                 alignment: Alignment.topCenter,
                 child: SingleChildScrollView(
-                  // padding: EdgeInsets.only(
-                  //   top: margenExterior * 2.3,
-                  //   left: margenExterior,
-                  //   right: margenExterior,
-                  //   bottom: margenExterior,
-                  // ),
-                  padding: EdgeInsets.all(margenExterior-2),
+                  padding: EdgeInsets.only(
+                    top: movil? margenExterior-2: margenExterior * 2.3,
+                    left: movil? margenExterior-2: margenExterior,
+                    right: movil? margenExterior-2: margenExterior,
+                    bottom: movil? margenExterior-2: margenExterior,
+                  ),
+                  // padding: EdgeInsets.all(margenExterior-2),
                   child: ConstrainedBox(
                     constraints: BoxConstraints(
                       maxWidth: maxAnchoPanel,
@@ -133,7 +140,7 @@ class _SuperposicionMenuInicioState extends State<SuperposicionMenuInicio> {
                             SizedBox(
                               width: double.infinity,
                               child: SizedBox(
-                                height: esMovil ? altoPantalla * 0.22 : 220,
+                                height: movil ? altoPantalla * 0.561 : 220,
                                 child: ClipRect(
                                   child: PageView(
                                     controller: _pageController,
@@ -147,7 +154,7 @@ class _SuperposicionMenuInicioState extends State<SuperposicionMenuInicio> {
                                     children: [
                                       Padding(
                                         padding: EdgeInsets.symmetric(
-                                          horizontal: esMovil ? 2 : 8,
+                                          horizontal: movil ? altoPantalla*.021 : 8,
                                         ),
                                         child: TarjetaPersonaje(
                                           titulo: 'prueba',
@@ -168,7 +175,7 @@ class _SuperposicionMenuInicioState extends State<SuperposicionMenuInicio> {
                                       ),
                                       Padding(
                                         padding: EdgeInsets.symmetric(
-                                          horizontal: esMovil ? 2 : 8,
+                                          horizontal: movil ? altoPantalla * 0.021 : 8,
                                         ),
                                         child: TarjetaPersonaje(
                                           titulo: 'Pepe',
@@ -194,7 +201,7 @@ class _SuperposicionMenuInicioState extends State<SuperposicionMenuInicio> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: esMovil ? 12 : 18),
+                            SizedBox(height: movil ? altoPantalla*.046 : 18),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -207,7 +214,7 @@ class _SuperposicionMenuInicioState extends State<SuperposicionMenuInicio> {
                                 ),
                               ],
                             ),
-                            SizedBox(height: esMovil ? 5 : 14),
+                            SizedBox(height: movil ? altoPantalla * 0.021 : 14),
                             SizedBox(
                               width: double.infinity,
                               child: ElevatedButton(
@@ -220,11 +227,11 @@ class _SuperposicionMenuInicioState extends State<SuperposicionMenuInicio> {
                                   backgroundColor: const Color(0xFF6DFF7A),
                                   foregroundColor: Colors.black,
                                   padding: EdgeInsets.symmetric(
-                                    vertical: esMovil ? 10 : 12,
-                                    horizontal: esMovil ? 12 : 16,
+                                    vertical: movil ? altoPantalla*.031 : 12,
+                                    horizontal: movil ? altoPantalla*.041 : 16,
                                   ),
                                   textStyle: TextStyle(
-                                    fontSize: esMovil ? 14 : 16,
+                                    fontSize: movil ? altoPantalla*0.041 : 16,
                                     fontWeight: FontWeight.w700,
                                   ),
                                   shape: RoundedRectangleBorder(
@@ -244,7 +251,7 @@ class _SuperposicionMenuInicioState extends State<SuperposicionMenuInicio> {
               ),
             ),
             Positioned(
-              top: -325,
+              top: movil ? altoPantalla*-.825 : -48,
               bottom: 0,
               left: 0,
               right: 0,
