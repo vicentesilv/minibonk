@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:minibonk/features/juego/presentation/overlays/components/preview_personaje.dart';
 
 class TarjetaPersonaje extends StatelessWidget {
-  const TarjetaPersonaje({
+  const TarjetaPersonaje({super.key, 
     required this.titulo,
     required this.subtitulo,
     required this.descripcion,
@@ -28,17 +28,15 @@ class TarjetaPersonaje extends StatelessWidget {
     final fondo = seleccionada ? const Color(0xFF1E2F21) : const Color(0xFF0F1410);
     final anchoPantalla = MediaQuery.sizeOf(context).width;
     final movil = Platform.isAndroid || Platform.isIOS || Platform.isFuchsia;
-    final esMovil = anchoPantalla < 700;
-    final altoImagen = movil ? anchoPantalla*0.176 : 128.0;
-    final tamanioTitulo = movil ? anchoPantalla*0.02 : 17.0;
-    print("el ancho de la pantalla es $anchoPantalla y seleccionada es $seleccionada");
+    final altoImagen = movil ? anchoPantalla*0.176 : anchoPantalla*0.213;
+    final tamanioTitulo = movil ? anchoPantalla*0.02 : anchoPantalla*0.0213;
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(18),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 180),
         margin: const EdgeInsets.only(bottom: 2),
-        padding: const EdgeInsets.all(8),
+        padding: EdgeInsets.all(movil?8 : 30),
         decoration: BoxDecoration(
           color: fondo,
           borderRadius: BorderRadius.circular(18),
@@ -83,49 +81,9 @@ class TarjetaPersonaje extends StatelessWidget {
                       },
                     ),
             ),
-            const SizedBox(height: 4),
+            SizedBox(height: movil ? 4: 18),
             LayoutBuilder(
               builder: (context, constraints) {
-                final usarColumna = constraints.maxWidth < 340;
-
-                if (usarColumna) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        titulo,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: tamanioTitulo,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                      // const SizedBox(height: 2),
-                      Text(
-                        subtitulo,
-                        style: TextStyle(
-                          color: seleccionada
-                              ? const Color(0xFF8CFF93)
-                              : Colors.white60,
-                          fontWeight: FontWeight.w600,
-                          fontSize: movil ? anchoPantalla*0.0165 : 12,
-                        ),
-                      ),
-                      const SizedBox(height: 3),
-                      Text(
-                        descripcion,
-                        style: TextStyle(
-                          color: Colors.white70,
-                          height: 1.25,
-                          fontSize: movil ? anchoPantalla*0.016 : 11.0,
-                        ),
-                        maxLines: movil ? (anchoPantalla*0.006).toInt() : 4,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
-                  );
-                }
-
                 return Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -150,7 +108,7 @@ class TarjetaPersonaje extends StatelessWidget {
                                   ? const Color(0xFF8CFF93)
                                   : Colors.white60,
                               fontWeight: FontWeight.w600,
-                              fontSize: movil ? anchoPantalla*0.017 : 12,
+                              fontSize: movil ? anchoPantalla*0.017 : anchoPantalla*0.012,
                             ),
                           ),
                         ],
@@ -164,9 +122,9 @@ class TarjetaPersonaje extends StatelessWidget {
                         style: TextStyle(
                           color: Colors.white70,
                           height: 1.25,
-                          fontSize: movil ? anchoPantalla*0.016 : 11.0,
+                          fontSize: movil ? anchoPantalla*0.016 : anchoPantalla*0.0112,
                         ),
-                        maxLines: movil ? (anchoPantalla*0.006).toInt() : 4,
+                        maxLines: movil ? (anchoPantalla*0.006).toInt() : (anchoPantalla*0.00213).toInt(),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),

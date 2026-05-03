@@ -54,10 +54,10 @@ class _SuperposicionMenuInicioState extends State<SuperposicionMenuInicio> {
     final altoPantalla = size.height;
     final movil = Platform.isAndroid || Platform.isIOS || Platform.isFuchsia;
     // Usar porcentajes para móviles
-    final margenExterior = movil ? altoPantalla * 0.061 : 24.0;
-    final rellenoPanel = movil ? altoPantalla * 0.061 : 24.0;
-    final maxAnchoPanel = movil ? anchoPantalla * 1.097 : 920.0;
-    final maxAltoPanel = movil ? altoPantalla * 0.9 : altoPantalla * 0.9;
+    final margenExterior = movil ? altoPantalla * 0.061 : anchoPantalla*0.0213;
+    final rellenoPanel = movil ? altoPantalla * 0.061 : anchoPantalla*0.0287;
+    final maxAnchoPanel = movil ? anchoPantalla * 1.097 : anchoPantalla*0.744;
+    final maxAltoPanel = movil ? altoPantalla * 0.9 : anchoPantalla*0.637;
    // ignore: avoid_print
    print("es movil: $movil");
    print("el ancho de la pantalla es: $anchoPantalla");
@@ -85,7 +85,6 @@ class _SuperposicionMenuInicioState extends State<SuperposicionMenuInicio> {
                     right: movil? margenExterior-2: margenExterior,
                     bottom: movil? margenExterior-2: margenExterior,
                   ),
-                  // padding: EdgeInsets.all(margenExterior-2),
                   child: ConstrainedBox(
                     constraints: BoxConstraints(
                       maxWidth: maxAnchoPanel,
@@ -103,7 +102,7 @@ class _SuperposicionMenuInicioState extends State<SuperposicionMenuInicio> {
                         borderRadius: BorderRadius.circular(28),
                         border: Border.all(
                           color: const Color(0xFF4F8F55),
-                          width: 2,
+                          width: movil ? 2 : 4,
                         ),
                         boxShadow: const [
                           BoxShadow(
@@ -140,7 +139,7 @@ class _SuperposicionMenuInicioState extends State<SuperposicionMenuInicio> {
                             SizedBox(
                               width: double.infinity,
                               child: SizedBox(
-                                height: movil ? altoPantalla * 0.561 : 220,
+                                height: movil ? altoPantalla * 0.561 : anchoPantalla*0.319,
                                 child: ClipRect(
                                   child: PageView(
                                     controller: _pageController,
@@ -154,7 +153,7 @@ class _SuperposicionMenuInicioState extends State<SuperposicionMenuInicio> {
                                     children: [
                                       Padding(
                                         padding: EdgeInsets.symmetric(
-                                          horizontal: movil ? altoPantalla*.021 : 8,
+                                          horizontal: movil ? altoPantalla*.021 : anchoPantalla*0.008,
                                         ),
                                         child: TarjetaPersonaje(
                                           titulo: 'prueba',
@@ -175,7 +174,7 @@ class _SuperposicionMenuInicioState extends State<SuperposicionMenuInicio> {
                                       ),
                                       Padding(
                                         padding: EdgeInsets.symmetric(
-                                          horizontal: movil ? altoPantalla * 0.021 : 8,
+                                          horizontal: movil ? altoPantalla * 0.021 : anchoPantalla*0.008,
                                         ),
                                         child: TarjetaPersonaje(
                                           titulo: 'Pepe',
@@ -201,7 +200,7 @@ class _SuperposicionMenuInicioState extends State<SuperposicionMenuInicio> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: movil ? altoPantalla*.046 : 18),
+                            SizedBox(height: movil ? altoPantalla*.046 : anchoPantalla*0.016),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -214,7 +213,7 @@ class _SuperposicionMenuInicioState extends State<SuperposicionMenuInicio> {
                                 ),
                               ],
                             ),
-                            SizedBox(height: movil ? altoPantalla * 0.021 : 14),
+                            SizedBox(height: movil ? altoPantalla * 0.021 : anchoPantalla*0.016),
                             SizedBox(
                               width: double.infinity,
                               child: ElevatedButton(
@@ -227,11 +226,11 @@ class _SuperposicionMenuInicioState extends State<SuperposicionMenuInicio> {
                                   backgroundColor: const Color(0xFF6DFF7A),
                                   foregroundColor: Colors.black,
                                   padding: EdgeInsets.symmetric(
-                                    vertical: movil ? altoPantalla*.031 : 12,
-                                    horizontal: movil ? altoPantalla*.041 : 16,
+                                    vertical: movil ? altoPantalla*.031 : anchoPantalla*0.011,
+                                    horizontal: movil ? altoPantalla*.041 : anchoPantalla*0.011,
                                   ),
                                   textStyle: TextStyle(
-                                    fontSize: movil ? altoPantalla*0.041 : 16,
+                                    fontSize: movil ? altoPantalla*0.041 : anchoPantalla*0.014,
                                     fontWeight: FontWeight.w700,
                                   ),
                                   shape: RoundedRectangleBorder(
@@ -251,7 +250,7 @@ class _SuperposicionMenuInicioState extends State<SuperposicionMenuInicio> {
               ),
             ),
             Positioned(
-              top: movil ? altoPantalla*-.825 : -48,
+              top: movil ? altoPantalla*-.825 : anchoPantalla*-0.4353,
               bottom: 0,
               left: 0,
               right: 0,
@@ -268,11 +267,12 @@ class _SuperposicionMenuInicioState extends State<SuperposicionMenuInicio> {
                       decoration: BoxDecoration(
                         color: const Color(0xFF1F3E22),
                         borderRadius: BorderRadius.circular(999),
-                        border: Border.all(color: const Color(0xFF6DFF7A)),
+                        border: Border.all(color: const Color(0xFF6DFF7A),width: movil ? 1.5 : 3),
                       ),
-                      child: const Text(
+                      child:  Text(
                         'Minibonk',
                         style: TextStyle(
+                          fontSize: movil? anchoPantalla*0.02 : anchoPantalla*0.015,
                           color: Colors.white,
                           fontWeight: FontWeight.w700,
                           letterSpacing: 2,
