@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:minibonk/features/juego/presentation/overlays/components/preview_personaje.dart';
 
@@ -25,10 +27,11 @@ class TarjetaPersonaje extends StatelessWidget {
     final borde = seleccionada ? const Color(0xFF6DFF7A) : const Color(0xFF3A4A3C);
     final fondo = seleccionada ? const Color(0xFF1E2F21) : const Color(0xFF0F1410);
     final anchoPantalla = MediaQuery.sizeOf(context).width;
+    final movil = Platform.isAndroid || Platform.isIOS || Platform.isFuchsia;
     final esMovil = anchoPantalla < 700;
-    final altoImagen = esMovil ? 84.0 : 128.0;
-    final tamanioTitulo = esMovil ? 14.0 : 17.0;
-
+    final altoImagen = movil ? anchoPantalla*0.176 : 128.0;
+    final tamanioTitulo = movil ? anchoPantalla*0.02 : 17.0;
+    print("el ancho de la pantalla es $anchoPantalla y seleccionada es $seleccionada");
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(18),
@@ -87,7 +90,7 @@ class TarjetaPersonaje extends StatelessWidget {
 
                 if (usarColumna) {
                   return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
                         titulo,
@@ -97,7 +100,7 @@ class TarjetaPersonaje extends StatelessWidget {
                           fontWeight: FontWeight.w800,
                         ),
                       ),
-                      const SizedBox(height: 2),
+                      // const SizedBox(height: 2),
                       Text(
                         subtitulo,
                         style: TextStyle(
@@ -105,18 +108,18 @@ class TarjetaPersonaje extends StatelessWidget {
                               ? const Color(0xFF8CFF93)
                               : Colors.white60,
                           fontWeight: FontWeight.w600,
-                          fontSize: esMovil ? 11 : 12,
+                          fontSize: movil ? anchoPantalla*0.0165 : 12,
                         ),
                       ),
-                      const SizedBox(height: 6),
+                      const SizedBox(height: 3),
                       Text(
                         descripcion,
                         style: TextStyle(
                           color: Colors.white70,
                           height: 1.25,
-                          fontSize: esMovil ? 10.0 : 11.0,
+                          fontSize: movil ? anchoPantalla*0.016 : 11.0,
                         ),
-                        maxLines: esMovil ? 3 : 4,
+                        maxLines: movil ? (anchoPantalla*0.006).toInt() : 4,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ],
@@ -124,12 +127,12 @@ class TarjetaPersonaje extends StatelessWidget {
                 }
 
                 return Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Expanded(
                       flex: 3,
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
                             titulo,
@@ -147,7 +150,7 @@ class TarjetaPersonaje extends StatelessWidget {
                                   ? const Color(0xFF8CFF93)
                                   : Colors.white60,
                               fontWeight: FontWeight.w600,
-                              fontSize: esMovil ? 11 : 12,
+                              fontSize: movil ? anchoPantalla*0.017 : 12,
                             ),
                           ),
                         ],
@@ -161,9 +164,9 @@ class TarjetaPersonaje extends StatelessWidget {
                         style: TextStyle(
                           color: Colors.white70,
                           height: 1.25,
-                          fontSize: esMovil ? 10.0 : 11.0,
+                          fontSize: movil ? anchoPantalla*0.016 : 11.0,
                         ),
-                        maxLines: esMovil ? 3 : 4,
+                        maxLines: movil ? (anchoPantalla*0.006).toInt() : 4,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
