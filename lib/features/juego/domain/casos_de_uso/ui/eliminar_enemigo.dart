@@ -4,5 +4,8 @@ import 'actualizar_ui.dart';
 
 void alEliminarEnemigoJuego(JuegoMiniBonk juego) {
   juego.enemigosEliminados++;
+  if (juego.enemigosActivosOleada > 0) {
+    juego.enemigosActivosOleada--;
+  }
   actualizarUiJuego(juego);
 }

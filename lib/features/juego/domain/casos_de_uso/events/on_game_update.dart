@@ -14,14 +14,33 @@ void onGameUpdate(JuegoMiniBonk juego, double dt) {
   // Mover el mapa con joystick/teclado
   moverMapaJuego(juego, dt);
 
-  juego.temporizadorOleada += dt;
+  if (juego.temporizadorEsperaOleada > 0) {
+    juego.temporizadorEsperaOleada -= dt;
+
+    if (juego.temporizadorEsperaOleada <= 0) {
+      juego.temporizadorEsperaOleada = 0;
+      juego.oleada++;
+      juego.intervaloAparicion = max(0.32, juego.intervaloAparicion * 0.9);
+      juego.temporizadorAparicion = 0;
+      juego.temporizadorOleada = 0;
+      juego.objetivoEnemigosOleada = 6 + (juego.oleada * 2);
+      juego.enemigosGeneradosOleada = 0;
+      juego.enemigosActivosOleada = 0;
+    }
+
+    actualizarUiJuego(juego);
+    return;
+  }
+
   juego.temporizadorAparicion += dt;
 
-  if (juego.temporizadorOleada >= 20) {
-    juego.temporizadorOleada = 0;
-    juego.oleada++;
-    juego.intervaloAparicion = max(0.32, juego.intervaloAparicion * 0.9);
-    actualizarUiJuego(juego);
+  if (juego.enemigosGeneradosOleada >= juego.objetivoEnemigosOleada) {
+    if (juego.enemigosActivosOleada == 0) {
+      juego.temporizadorAparicion = 0;
+      juego.temporizadorEsperaOleada = 10;
+      actualizarUiJuego(juego);
+    }
+    return;
   }
 
   if (juego.temporizadorAparicion >= juego.intervaloAparicion) {

@@ -42,7 +42,7 @@ class SuperposicionHud extends StatelessWidget {
                       constraints: const BoxConstraints(maxWidth: 280),
                       child: FilaEtiqueta(
                         texto:
-                            'Oleada ${estado.oleada}  •  Nivel ${estado.nivel}  •  Eliminaciones ${estado.eliminaciones}',
+                            'Oleada ${estado.oleada}  •   Eliminaciones ${estado.eliminaciones}${estado.tiempoEsperaOleada > 0 ? '  •  Siguiente en ${estado.tiempoEsperaOleada.ceil()}s' : ''}',
                         compacta: true,
                       ),
                     ),
@@ -167,7 +167,7 @@ class SuperposicionHud extends StatelessWidget {
                       Expanded(
                         child: FilaEtiqueta(
                           texto:
-                              'Oleada ${estado.oleada}  •  Nivel ${estado.nivel}  •  Eliminaciones ${estado.eliminaciones}',
+                              'Oleada ${estado.oleada}a  •  Eliminaciones ${estado.eliminaciones}${estado.tiempoEsperaOleada > 0 ? '  •  Siguiente en ${estado.tiempoEsperaOleada.ceil()}s' : ''}',
                           compacta: compacto,
                         ),
                       ),

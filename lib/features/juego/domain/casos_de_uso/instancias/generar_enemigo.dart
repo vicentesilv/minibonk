@@ -3,6 +3,14 @@ import 'package:minibonk/features/juego/presentation/componentes/entidades.dart'
 import 'package:minibonk/features/juego/presentation/juego/juego_mini_bonk.dart';
 
 void crearEnemigoJuego(JuegoMiniBonk juego) {
+  if (juego.temporizadorEsperaOleada > 0) {
+    return;
+  }
+
+  if (juego.enemigosGeneradosOleada >= juego.objetivoEnemigosOleada) {
+    return;
+  }
+
   final lado = juego.aleatorio.nextInt(4);
   late Vector2 posicion;
 
@@ -25,4 +33,7 @@ void crearEnemigoJuego(JuegoMiniBonk juego) {
       danioContacto: 10,
     ),
   );
+
+  juego.enemigosGeneradosOleada++;
+  juego.enemigosActivosOleada++;
 }

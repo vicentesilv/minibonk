@@ -25,7 +25,11 @@ void reiniciarJuegoExterno(JuegoMiniBonk juego) {
   juego.enemigosEliminados = 0;
   juego.temporizadorAparicion = 0;
   juego.temporizadorOleada = 0;
+  juego.temporizadorEsperaOleada = 0;
   juego.intervaloAparicion = 1.1;
+  juego.objetivoEnemigosOleada = 6 + (juego.oleada * 2);
+  juego.enemigosGeneradosOleada = 0;
+  juego.enemigosActivosOleada = 0;
   juego.estaPausadoPorMejora = false;
   juego.estaPausadoManual = false;
   juego.finDePartida = false;
@@ -53,7 +57,11 @@ void volverAlMenuInicio(JuegoMiniBonk juego) {
   juego.enemigosEliminados = 0;
   juego.temporizadorAparicion = 0;
   juego.temporizadorOleada = 0;
+  juego.temporizadorEsperaOleada = 0;
   juego.intervaloAparicion = 1.1;
+  juego.objetivoEnemigosOleada = 6 + (juego.oleada * 2);
+  juego.enemigosGeneradosOleada = 0;
+  juego.enemigosActivosOleada = 0;
   juego.estaPausadoPorMejora = false;
   juego.estaPausadoManual = false;
   juego.finDePartida = false;

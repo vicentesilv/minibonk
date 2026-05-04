@@ -7,6 +7,9 @@ class EstadoInterfazJuego {
     this.vida = 100,
     this.vidaMaxima = 100,
     this.eliminaciones = 0,
+    this.enemigosActivosOleada = 0,
+    this.objetivoEnemigosOleada = 0,
+    this.tiempoEsperaOleada = 0,
     this.pausadoPorMejora = false,
     this.pausadoManual = false,
     this.finDePartida = false,
@@ -19,6 +22,9 @@ class EstadoInterfazJuego {
   final double vida;
   final double vidaMaxima;
   final int eliminaciones;
+  final int enemigosActivosOleada;
+  final int objetivoEnemigosOleada;
+  final double tiempoEsperaOleada;
   final bool pausadoPorMejora;
   final bool pausadoManual;
   final bool finDePartida;
@@ -31,6 +37,9 @@ class EstadoInterfazJuego {
     double? vida,
     double? vidaMaxima,
     int? eliminaciones,
+    int? enemigosActivosOleada,
+    int? objetivoEnemigosOleada,
+    double? tiempoEsperaOleada,
     bool? pausadoPorMejora,
     bool? pausadoManual,
     bool? finDePartida,
@@ -43,6 +52,9 @@ class EstadoInterfazJuego {
       vida: vida ?? this.vida,
       vidaMaxima: vidaMaxima ?? this.vidaMaxima,
       eliminaciones: eliminaciones ?? this.eliminaciones,
+      enemigosActivosOleada: enemigosActivosOleada ?? this.enemigosActivosOleada,
+      objetivoEnemigosOleada: objetivoEnemigosOleada ?? this.objetivoEnemigosOleada,
+      tiempoEsperaOleada: tiempoEsperaOleada ?? this.tiempoEsperaOleada,
       pausadoPorMejora: pausadoPorMejora ?? this.pausadoPorMejora,
       pausadoManual: pausadoManual ?? this.pausadoManual,
       finDePartida: finDePartida ?? this.finDePartida,

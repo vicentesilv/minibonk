@@ -40,7 +40,12 @@ class JuegoMiniBonk extends FlameGame
   Vector2 entradaTeclado = Vector2.zero();
   double temporizadorAparicion = 0;
   double temporizadorOleada = 0;
+  double temporizadorEsperaOleada = 0;
   double intervaloAparicion = 1.1;
+
+  int objetivoEnemigosOleada = 0;
+  int enemigosGeneradosOleada = 0;
+  int enemigosActivosOleada = 0;
 
   int oleada = 1;
   int nivel = 1;
@@ -166,6 +171,13 @@ class JuegoMiniBonk extends FlameGame
     estaPausadoManual = false;
     estaPausadoPorMejora = false;
     finDePartida = false;
+    temporizadorAparicion = 0;
+    temporizadorOleada = 0;
+    temporizadorEsperaOleada = 0;
+    intervaloAparicion = 1.1;
+    objetivoEnemigosOleada = 6 + (oleada * 2);
+    enemigosGeneradosOleada = 0;
+    enemigosActivosOleada = 0;
     overlays.remove('MenuInicio');
     overlays.add('Interfaz');
     resumeEngine();

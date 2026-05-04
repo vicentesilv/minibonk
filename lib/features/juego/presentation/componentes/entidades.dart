@@ -200,6 +200,7 @@ class Enemigo extends CircleComponent
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     if (other is PersonajeBase) {
       game.recibirDanioJugador(danioContacto);
+      game.alEliminarEnemigo();
       removeFromParent();
     }
     super.onCollision(intersectionPoints, other);
