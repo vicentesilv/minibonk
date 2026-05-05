@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:minibonk/features/juego/presentation/aplicacion/aplicacion_mini_bonk.dart';
 import 'dart:async';
+import 'dart:io';
+import 'package:window_manager/window_manager.dart';
 
 Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,6 +26,12 @@ Future<void> main(List<String> args) async {
           callback,
         );
       };
+
+  // Configurar pantalla completa en sistemas de escritorio
+  if (Platform.isWindows || Platform.isMacOS || Platform.isLinux) {
+    await windowManager.ensureInitialized();
+    await windowManager.setFullScreen(true);
+  }
 
   // Forzar orientación horizontal y bloquear vertical
   await SystemChrome.setPreferredOrientations([
