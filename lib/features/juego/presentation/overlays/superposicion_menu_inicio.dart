@@ -3,6 +3,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:minibonk/features/juego/domain/modelos/tipo_personaje.dart';
 import 'package:minibonk/features/juego/presentation/juego/juego_mini_bonk.dart';
 import 'package:minibonk/features/juego/presentation/overlays/components/tarjeta_personaje.dart';
@@ -75,6 +76,47 @@ class _SuperposicionMenuInicioState extends State<SuperposicionMenuInicio> {
         ),
         child: Stack(
           children: [
+            // Botón de salida para dispositivos de escritorio
+            if (Platform.isWindows || Platform.isMacOS || Platform.isLinux)
+              Positioned(
+                top: 16,
+                left: 16,
+                child: SafeArea(
+                  child: Material(
+                    color: Colors.transparent,
+                    child: Tooltip(
+                      message: 'Salir',
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF6DFF7A),
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Color(0xAA000000),
+                              blurRadius: 12,
+                              offset: Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: InkWell(
+                          onTap: () {
+                            SystemNavigator.pop();
+                          },
+                          borderRadius: BorderRadius.circular(8),
+                          child: Padding(
+                            padding: const EdgeInsets.all(12),
+                            child: Icon(
+                              Icons.close,
+                              color: Colors.black,
+                              size: 24,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             SafeArea(
               child: Align(
                 alignment: Alignment.topCenter,
