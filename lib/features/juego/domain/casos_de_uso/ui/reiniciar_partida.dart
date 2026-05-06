@@ -13,6 +13,7 @@ void reiniciarJuegoExterno(JuegoMiniBonk juego) {
   ]) {
     componente.removeFromParent();
   }
+  juego.eliminarMonedasEntreRondas();
 
   juego.mapContainer.position = Vector2.zero();
   juego.jugador.position = juego.size / 2;
@@ -36,6 +37,7 @@ void reiniciarJuegoExterno(JuegoMiniBonk juego) {
   juego.opcionesActualesDeMejoraInternas.clear();
   juego.overlays.remove('Mejoras');
   juego.resumeEngine();
+  juego.distribuirMonedasOleada();
   actualizarUiJuego(juego);
 }
 
@@ -48,6 +50,7 @@ void volverAlMenuInicio(JuegoMiniBonk juego) {
   ]) {
     componente.removeFromParent();
   }
+  juego.eliminarMonedasEntreRondas();
 
   juego.mapContainer.position = Vector2.zero();
   juego.oleada = 1;

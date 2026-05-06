@@ -279,3 +279,20 @@ class OrbeXp extends SpriteComponent
     super.onCollision(intersectionPoints, other);
   }
 }
+
+class Moneda extends SpriteComponent with HasGameReference<JuegoMiniBonk> {
+  Moneda({required super.position})
+      : super(
+          anchor: Anchor.center,
+          priority: 90000,
+          
+          // paint: Paint()..color = const Color(0xFFFFD54A),
+        );
+
+  @override
+  Future<void> onLoad() async {
+    await super.onLoad();
+    sprite = await Sprite.load('Objetos del Mapa/moneda.png');
+    size = Vector2(100, 100);   
+}
+}

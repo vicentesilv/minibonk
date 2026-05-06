@@ -26,6 +26,7 @@ void onGameUpdate(JuegoMiniBonk juego, double dt) {
       juego.objetivoEnemigosOleada = 6 + (juego.oleada * 2);
       juego.enemigosGeneradosOleada = 0;
       juego.enemigosActivosOleada = 0;
+      juego.distribuirMonedasOleada();
     }
 
     actualizarUiJuego(juego);

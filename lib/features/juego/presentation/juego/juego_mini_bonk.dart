@@ -10,6 +10,7 @@ import 'package:minibonk/features/juego/domain/modelos/tipo_personaje.dart';
 import 'package:minibonk/features/juego/domain/casos_de_uso/jugador/agregar_xp.dart';
 import 'package:minibonk/features/juego/domain/casos_de_uso/jugador/aplicar_mejora.dart';
 import 'package:minibonk/features/juego/domain/casos_de_uso/instancias/crear_bala.dart';
+import 'package:minibonk/features/juego/domain/casos_de_uso/instancias/crear_moneda.dart';
 import 'package:minibonk/features/juego/domain/casos_de_uso/instancias/crear_orbe_xp.dart';
 import 'package:minibonk/features/juego/domain/casos_de_uso/ui/eliminar_enemigo.dart';
 import 'package:minibonk/features/juego/domain/casos_de_uso/events/entrada_movimiento.dart';
@@ -119,6 +120,16 @@ class JuegoMiniBonk extends FlameGame
     crearOrbeXpJuego(this, en, cantidad);
   }
 
+  void distribuirMonedasOleada() {
+    distribuirMonedasOleadaJuego(this);
+  }
+
+  void eliminarMonedasEntreRondas() {
+    for (final moneda in mapContainer.children.whereType<Moneda>().toList()) {
+      moneda.removeFromParent();
+    }
+  }
+
   void agregarXp(double cantidad) {
     agregarXpJuego(this, cantidad);
   }
@@ -181,6 +192,7 @@ class JuegoMiniBonk extends FlameGame
     overlays.remove('MenuInicio');
     overlays.add('Interfaz');
     resumeEngine();
+    distribuirMonedasOleada();
     actualizarUiJuego(this);
   }
 
